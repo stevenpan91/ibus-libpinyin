@@ -4,3 +4,17 @@ Intelligent Pinyin engine based on libpinyin for IBus
 
 Description
 It includes a Chinese Pinyin input method and a Chinese ZhuYin (Bopomofo) input method based on libpinyin for IBus.
+
+Install:
+
+Step 1. Get dependencies ibus-1.0-dev, sqlite3, libsqlite3-dev, libdb-dev and libdb++-dev
+
+Step 2. Get latest libpinyin tarball
+
+(follow these instructions)
+
+https://github.com/libpinyin/ibus-libpinyin/wiki/Installation
+
+Note that you should use ./configure then make && make install instead of using "./autogen.sh" like in the instructions
+
+Step 3. Run ./autogen.sh on this repo 
