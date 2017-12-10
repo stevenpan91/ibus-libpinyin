@@ -5,7 +5,13 @@ Intelligent Pinyin engine based on libpinyin for IBus
 Description
 It includes a Chinese Pinyin input method and a Chinese ZhuYin (Bopomofo) input method based on libpinyin for IBus.
 
-Note: I am primarily editing scripts/sctc.py
+--------------------------------------------------------------------------
+ 
+Notes: 
+-I am primarily editing src/PYSimpTradConverterTable.h
+-You also need fonts-hanazono to see some of the characters
+-As of Dec 11, 2017 the logic is set primarily to convert SC to TC. Editing characters
+must be from the TC side unless the code logic changes. Looking into it
 
 Install:
 
@@ -23,15 +29,35 @@ export PKG_CONFIG_PATH=/home/base_user/custom_libs/lib/pkgconfig
 
 Step 1. Recompile glib2
 
-Need libmount-dev
+~$ sudo apt-get install libmount-dev xz-utils
 
-Also need to recompile wayland-protocols from github
+download latest tarball http://ftp.gnome.org/pub/gnome/sources/glib/
+
+~$ tar -xf glib-X.XX.X.tar.xz
+
+~$ git clone https://github.com/wayland-project/wayland-protocols
+
+~$ cd wayland-protocols
+
+～$ ./autogen.sh --prefix=<somewhere you want to put it> && make && make install
+
+~$ cd /path/to/glib-X.XX.X
+
+～$ ./autogen.sh --prefix=<somewhere you want to put it> && make && make install
 
 Step 2. Recompile gtk+-3
 
+get tarball from http://ftp.gnome.org/pub/gnome/sources/gtk+/
+
+~$ tar -xf gtk+-3.XX.XX.tar.xz
+
+~$ cd /path/to/gtk+-3.XX.XX
+
+～$ ./autogen.sh --prefix=<somewhere you want to put it> && make && make install
+
 Step 3. Recompile ibus 1.5.17 (Optional?)
 
-Note that my original recompiled libpinyin didn't work. I recompiled ibus and it still didn't work, then I deleted it so now I'm using the standard ibus package for ubuntu (1.5.11) but now somehow it works...?
+Note that my original recompiled ibus-libpinyin didn't work. I recompiled ibus and it still didn't work, then I deleted it so now I'm using the standard ibus package for ubuntu (1.5.11) but now somehow it works...?
 
 ~$sudo apt-get install gtk-doc-tools gtk2.0 gtk3.0 libgtk-3-dev libdconf-dev libnotify-dev
 
@@ -42,6 +68,14 @@ Note that my original recompiled libpinyin didn't work. I recompiled ibus and it
 ~$cd /usr/share/unicode/cldr/common
 
 ~$git clone https://www.github.com/fujiwarat/cldr-emoji-annotation.git .
+
+get ibus tarball https://github.com/ibus/ibus/releases
+
+~$ tar zxvf ibus-1.X.XX.tar.gz
+
+~$ cd /path/to/ibus-1.X.XX
+
+～$ ./autogen.sh --prefix=/usr && make && make install
 
 also when doing make you will need to modify libtool see github issues here:
 https://www.github.com/ibus/ibus/issues/1952
