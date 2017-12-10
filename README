@@ -5,14 +5,33 @@ Intelligent Pinyin engine based on libpinyin for IBus
 Description
 It includes a Chinese Pinyin input method and a Chinese ZhuYin (Bopomofo) input method based on libpinyin for IBus.
 
+Note: I am primarily editing scripts/sctc.py
+
 Install:
+
+CAUTION!!!!: Do NOT execute ./autogen.sh without prefix (you should prefix to a special folder for glib and gtk). If you execute "make install" after simply doing "./autogen.sh && make" you risk destroying your system. 
+
+need to set these env variables
+
+export LD_LIBRARY_PATH=<wherever you've "make installed" glib to>
+export PKG_CONFIG_PATH=<the path with glib2 and libpinyin>
+
+example:
+
+export LD_LIBRARY_PATH=/home/base_user/custom_libs/lib
+export PKG_CONFIG_PATH=/home/base_user/custom_libs/lib/pkgconfig
 
 Step 1. Recompile glib2
 
 Need libmount-dev
 
+Also need to recompile wayland-protocols from github
 
-Step 1. Recompile ibus 1.5.17
+Step 2. Recompile gtk+-3
+
+Step 3. Recompile ibus 1.5.17 (Optional?)
+
+Note that my original recompiled libpinyin didn't work. I recompiled ibus and it still didn't work, then I deleted it so now I'm using the standard ibus package for ubuntu (1.5.11) but now somehow it works...?
 
 ~$sudo apt-get install gtk-doc-tools gtk2.0 gtk3.0 libgtk-3-dev libdconf-dev libnotify-dev
 
@@ -27,15 +46,18 @@ Step 1. Recompile ibus 1.5.17
 also when doing make you will need to modify libtool see github issues here:
 https://www.github.com/ibus/ibus/issues/1952
 
-Step 1. Get dependencies ibus-1.0-dev, sqlite3, libsqlite3-dev, libdb-dev and libdb++-dev
+Specifically you need to modify link_all_deplibs=no to link_all_deplibs=unknown
 
-Step 2. Get latest libpinyin tarball
+Step 4. Get dependencies ibus-1.0-dev, sqlite3, libsqlite3-dev, libdb-dev and libdb++-dev
+
+Step 5. Get latest libpinyin tarball
 
 (follow these instructions)
 
 https://github.com/libpinyin/ibus-libpinyin/wiki/Installation
 
-Note that you should use ./configure then make && make install instead of using "./autogen.sh" like in the instructions
+Note that you should use ./configure (with prefix to some folder set) then make && make install instead of using "./autogen.sh" like in the instructions
 
-Step 3. Run ./autogen.sh on this repo
+Step 6. Run ./autogen.sh --prefix=/usr on this repo (here prefix /usr is ok because libpinyin should be installed to the main system. Again, things like glib and gtk should NOT override the original main system files.)
 
+You need libglib2.0-dev
