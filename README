@@ -86,9 +86,21 @@ Step 4. Get dependencies ibus-1.0-dev, sqlite3, libsqlite3-dev, libdb-dev and li
 
 Step 5. Get latest libpinyin tarball
 
+https://sourceforge.net/projects/libpinyin/files/libpinyin/
+
 (follow these instructions)
 
 https://github.com/libpinyin/ibus-libpinyin/wiki/Installation
+
+~$ tar zxvf libpinyin-xx.tar.gz
+
+~$ cd libpinyin-xx
+
+~$ ./configure --prefix=/usr (or some other directory. Here /usr is safe)
+
+~$ make
+ 
+~$ sudo make install
 
 Note that you should use ./configure (with prefix to some folder set) then make && make install instead of using "./autogen.sh" like in the instructions
 
