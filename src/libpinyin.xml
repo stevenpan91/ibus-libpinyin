@@ -40,7 +40,7 @@
                         </author>
 			<icon>/usr/share/ibus-libpinyin/icons/ibus-bopomofo.svg</icon>
 			<layout>default</layout>
-			<longname>Bopomofo</longname>
+			<longname>Bopomofo (Intelligent)</longname>
 			<description>Bopomofo input method</description>
 			<rank>98</rank>
 			<symbol>&#x3109;</symbol>
