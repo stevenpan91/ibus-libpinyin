@@ -15,7 +15,7 @@ must be from the TC side unless the code logic changes. Looking into it
 
 Install: (please go to branch 1.5.x to see changed installation)
 
-<strike>CAUTION!!!!: Do NOT execute ./autogen.sh without prefix (you should prefix to a special folder for glib and gtk). If you execute "make install" after simply doing "./autogen.sh && make" you risk destroying your system. 
+<del>CAUTION!!!!: Do NOT execute ./autogen.sh without prefix (you should prefix to a special folder for glib and gtk). If you execute "make install" after simply doing "./autogen.sh && make" you risk destroying your system. 
 
 need to set these env variables
 
@@ -106,4 +106,4 @@ Note that you should use ./configure (with prefix to some folder set) then make 
 
 Step 6. Run ./autogen.sh --prefix=/usr on this repo (here prefix /usr is ok because libpinyin should be installed to the main system. Again, things like glib and gtk should NOT override the original main system files.)
 
-</strike>
+</del>
