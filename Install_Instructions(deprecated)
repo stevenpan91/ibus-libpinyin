@@ -1,0 +1,96 @@
+Note:
+It is recommended that you go to branch 1.5.x for an easier installation. If you wish to install using the latest libpinyin
+and ibus-libpinyin the procedure is very long and as shown below.
+
+Install:
+
+CAUTION!!!!: Do NOT execute ./autogen.sh without prefix (you should prefix to a special folder for glib and gtk). If you execute "make install" after simply doing "./autogen.sh && make" you risk destroying your system. 
+
+need to set these env variables
+
+export LD_LIBRARY_PATH=<wherever you've "make installed" glib to>
+export PKG_CONFIG_PATH=<the path with glib2 and libpinyin>
+
+example:
+
+export LD_LIBRARY_PATH=/home/base_user/custom_libs/lib
+export PKG_CONFIG_PATH=/home/base_user/custom_libs/lib/pkgconfig
+
+Step 1. Recompile glib2
+
+~$ sudo apt-get install libmount-dev xz-utils
+
+download latest tarball http://ftp.gnome.org/pub/gnome/sources/glib/
+
+~$ tar -xf glib-X.XX.X.tar.xz
+
+~$ git clone https://github.com/wayland-project/wayland-protocols
+
+~$ cd wayland-protocols
+
+～$ ./autogen.sh --prefix=<somewhere you want to put it> && make && make install
+
+~$ cd /path/to/glib-X.XX.X
+
+～$ ./autogen.sh --prefix=<somewhere you want to put it> && make && make install
+
+Step 2. Recompile gtk+-3
+
+get tarball from http://ftp.gnome.org/pub/gnome/sources/gtk+/
+
+~$ tar -xf gtk+-3.XX.XX.tar.xz
+
+~$ cd /path/to/gtk+-3.XX.XX
+
+～$ ./autogen.sh --prefix=<somewhere you want to put it> && make && make install
+
+Step 3. Recompile ibus 1.5.17 (Optional?)
+
+Note that my original recompiled ibus-libpinyin didn't work. I recompiled ibus and it still didn't work, then I deleted it so now I'm using the standard ibus package for ubuntu (1.5.11) but now somehow it works...?
+
+~$sudo apt-get install gtk-doc-tools gtk2.0 gtk3.0 libgtk-3-dev libdconf-dev libnotify-dev
+
+~$wget -r --no-parent https://www.unicode.org/Public/emoji/4.0/ -P /usr/share/unicode/emoji 
+
+~$mkdir -p /usr/share/unicode/cldr/common
+
+~$cd /usr/share/unicode/cldr/common
+
+~$git clone https://www.github.com/fujiwarat/cldr-emoji-annotation.git .
+
+get ibus tarball https://github.com/ibus/ibus/releases
+
+~$ tar zxvf ibus-1.X.XX.tar.gz
+
+~$ cd /path/to/ibus-1.X.XX
+
+～$ ./autogen.sh --prefix=/usr && make && make install
+
+also when doing make you will need to modify libtool see github issues here:
+https://www.github.com/ibus/ibus/issues/1952
+
+Specifically you need to modify link_all_deplibs=no to link_all_deplibs=unknown
+
+Step 4. Get dependencies ibus-1.0-dev, sqlite3, libsqlite3-dev, libdb-dev and libdb++-dev
+
+Step 5. Get latest libpinyin tarball
+
+https://sourceforge.net/projects/libpinyin/files/libpinyin/
+
+(follow these instructions)
+
+https://github.com/libpinyin/ibus-libpinyin/wiki/Installation
+
+~$ tar zxvf libpinyin-xx.tar.gz
+
+~$ cd libpinyin-xx
+
+~$ ./configure --prefix=/usr (or some other directory. Here /usr is safe)
+
+~$ make
+ 
+~$ sudo make install
+
+Note that you should use ./configure (with prefix to some folder set) then make && make install instead of using "./autogen.sh" like in the instructions
+
+Step 6. Run ./autogen.sh --prefix=/usr on this repo (here prefix /usr is ok because libpinyin should be installed to the main system. Again, things like glib and gtk should NOT override the original main system files.)
