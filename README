@@ -4,7 +4,7 @@ Intelligent Pinyin engine based on libpinyin for IBus
 
 Description
 It includes a Chinese Pinyin input method and a Chinese ZhuYin (Bopomofo) input method based on libpinyin for IBus.
---------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 Notes: 
 -I am primarily editing src/PYSimpTradConverterTable.h
 -You also need fonts-hanazono to see some of the characters
@@ -17,10 +17,10 @@ Install:
 ~$ sudo apt-get install ibus-1.0-dev sqlite3 libsqlite3-dev libdb-dev libdb++-dev gnome-common libibus-1.0-dev
 ~$ cd /path/to/project/folder
 ~$ git clone https://github.com/libpinyin/libpinyin.git 
-~$ cd libpinyin && git checkout origin/0.7.x
+~$ cd libpinyin && git checkout 0.7.x
 ~$ ./autogen.sh --prefix=/usr
 ~$ make && make install
 ~$ cd .. && git clone https://github.com/stevenpan91/ibus-libpinyin.git
-~$ cd ibus-libpinyin && git checkout origin/1.5.x
+~$ cd ibus-libpinyin && git checkout 1.5.x
 ~$ ./autogen.sh --prefix=/usr
 ~$ make && make install
